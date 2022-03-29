@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+
+  fs:
+    container_name: fs-api
+    restart: always
+    build:
+      context: ./
+    env_file:
+      - .env
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}

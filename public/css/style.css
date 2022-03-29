@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css?family=Baloo+2:400,500,600,700,800');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    font-family: 'Baloo 2', serif;
+    background-color: #F29560;
+}
+
+nav {
+    position: relative;
+    text-align: right;
+    padding: 20px;
+    margin: 20px;
+    top:20px;
+    animation: show-cat 5s ease forwards
+}
+
+nav img {
+    width: 64px;
+}
+
+#logo {
+    width: 353px;
+    position: absolute;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+/* 26 PATHs */
+#logo path:nth-child(2) {
+    stroke-linecap: round;
+    stroke-dasharray: 239px;
+    stroke-dashoffset: 239px;
+    animation: line-stroke 1.4s ease forwards
+}
+#logo path:nth-child(3) {
+    stroke-linecap: round;
+    stroke-dasharray: 332px;
+    stroke-dashoffset: 332px;
+    animation: line-stroke 1.4s ease forwards 0.3s
+}
+#logo path:nth-child(4) {
+    stroke-linecap: round;
+    stroke-dasharray: 332px;
+    stroke-dashoffset: 332px;
+    animation: line-stroke 1.4s ease forwards 0.6s
+}
+#logo path:nth-child(5) {
+    stroke-linecap: round;
+    stroke-dasharray: 332px;
+    stroke-dashoffset: 332px;
+    animation: line-stroke 1.4s ease forwards 0.9s
+}
+#logo path:nth-child(6) {
+    stroke-linecap: round;
+    stroke-dasharray: 64px;
+    stroke-dashoffset: 64px;
+    animation: line-stroke 1.4s ease forwards 1.2s
+}
+#logo path:nth-child(7) {
+    stroke-linecap: round;
+    stroke-dasharray: 281px;
+    stroke-dashoffset: 281px;
+    animation: line-stroke 1.4s ease forwards 1.5s
+}
+#logo path:nth-child(8) {
+    stroke-linecap: round;
+    stroke-dasharray: 206px;
+    stroke-dashoffset: 206px;
+    animation: line-stroke 1.4s ease forwards 1.8s
+}
+#logo path:nth-child(9) {
+    stroke-linecap: round;
+    stroke-dasharray: 332px;
+    stroke-dashoffset: 332px;
+    animation: line-stroke 1.4s ease forwards 2.1s
+}
+#logo path:nth-child(10) {
+    stroke-linecap: round;
+    stroke-dasharray: 332px;
+    stroke-dashoffset: 332px;
+    animation: line-stroke 1.4s ease forwards 2.3s
+}
+#logo path:nth-child(11) {
+    stroke-linecap: round;
+    stroke-dasharray: 298px;
+    stroke-dashoffset: 298px;
+    animation: line-stroke 1.4s ease forwards 2.6s
+}
+#logo path:nth-child(12) {
+    stroke-linecap: round;
+    stroke-dasharray: 297px;
+    stroke-dashoffset: 297px;
+    animation: line-stroke 1.4s ease forwards 2.8s
+}
+#logo path:nth-child(13) {
+    stroke-linecap: round;
+    stroke-dasharray: 275px;
+    stroke-dashoffset: 275px;
+    animation: line-stroke 1.4s ease forwards 3.1s
+}
+#logo path:nth-child(14) {
+    stroke-linecap: round;
+    stroke-dasharray: 133px;
+    stroke-dashoffset: 133px;
+    animation: line-stroke 1.4s ease forwards 3.4s
+}
+
+@keyframes line-stroke {
+    from {
+        fill:transparent;
+    }
+    to {
+        fill:#fff;
+        opacity: 0.3;
+        stroke-dashoffset: 0;
+    }
+    
+}
+
+@keyframes show-cat {
+    from {
+        opacity: 0;
+        transform: translate(0,50%);
+    }
+    to {
+        padding-top: 20px;
+        opacity: 1;
+    }
+}

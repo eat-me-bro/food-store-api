@@ -1,0 +1,27 @@
+{
+  "name": "food-store-api",
+  "version": "1.0.0",
+  "description": "API for food store location around your location",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server",
+    "dev": "nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eat-me-bro/food-store-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eat-me-bro/food-store-api/issues"
+  },
+  "homepage": "https://github.com/eat-me-bro/food-store-api#readme",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "moment": "^2.29.1",
+    "nodemon": "^2.0.15"
+  }
+}
