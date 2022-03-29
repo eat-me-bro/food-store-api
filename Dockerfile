@@ -16,5 +16,5 @@ COPY /public public/
 # Port exposed
 EXPOSE 5500
 
-# Run Node app
+# Run app
 CMD [ "npm", "start" ]
