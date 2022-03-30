@@ -31,9 +31,48 @@ const SERVER_PORT = process.env.SERVER_PORT || 5500
  */
 
 // Dasboard HTML Page
-app.get("/", function (req, res) {    
+app.get("/", async (req, res) => {    
     res.setHeader('Content-Type', 'text/html')
     res.status(200).sendFile(`${public_folder}index.htm`)
+})
+
+// Return all food store locations
+app.get("/foodstores", async (req, res) => {
+    res.setHeader('Content-Type', 'application/json')
+    
+    let dummyFoodStores = {
+        foodStores: [ 
+            { id: 1,
+                foodStore: "Casino",
+                location: {
+                    lon: 123.123,
+                    lat: 456.456
+                },
+                favorite: true,
+                lastVisite: "2022-30-03"     
+            },
+            { id: 2,
+                foodStore: "Dori, Dori",
+                location: {
+                    lon: 123.123,
+                    lat: 456.456
+                },
+                favorite: true,
+                lastVisite: "2022-29-03"     
+            },
+            { id: 3,
+                foodStore: "Chipo",
+                location: {
+                    lon: 123.123,
+                    lat: 456.456
+                },
+                favorite: false,
+                lastVisite: "2022-28-03"     
+        },
+        ]
+    }
+
+    res.status(200).send(JSON.stringify(dummyFoodStores))
 })
 
 /**
