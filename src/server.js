@@ -8,13 +8,13 @@ const app = express()
 // Access Origin
 app.use(function(req, res, next) {
 
-    const allowedOrigins = ['http://localhost:4200', 'http://192.168.178.40:4200'];
-    const origin = req.headers.origin;
-    if (allowedOrigins.includes(origin)) {
-        res.setHeader('Access-Control-Allow-Origin', origin);
-    }
-
+    // const allowedOrigins = ['http://localhost:4200', 'http://192.168.178.40:4200'];
+    // const origin = req.headers.origin;
+    // if (allowedOrigins.includes(origin)) {
+    //     res.setHeader('Access-Control-Allow-Origin', origin);
+    // }
     // res.header("Access-Control-Allow-Origin", "http://localhost:4200", "http://192.168.178.40:4200")
+    res.setHeader('Access-Control-Allow-Origin', '*')
     res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS")
     res.header("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers")
     next()
