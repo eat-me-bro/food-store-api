@@ -1,4 +1,4 @@
-FROM node:lts-slim
+FROM node:16.0.0-slim
 
 # App work directory
 WORKDIR /usr/src/app
