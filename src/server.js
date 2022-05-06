@@ -24,6 +24,7 @@ app.disable('x-powered-by')
 // Public Static File Folder
 let public_folder = path.join(__dirname, '..', '/public/')
 app.use(express.static(public_folder))
+app.use(express.json())
 
 const server = http.createServer(app)
 
@@ -46,43 +47,42 @@ app.get("/", async (req, res) => {
 })
 
 // Return all food store locations
-app.get("/foodstores", async (req, res) => {
+app.post("/foodstores", async (req, res) => {
     res.setHeader('Content-Type', 'application/json')
+
+    let long = req.body.long
+    let lat = req.body.lat
     
     let dummyFoodStores = [ 
-            { 
-                id: 1,
-                foodStore: "Casino",
-                location: {
-                    lon: "123.123",
-                    lat: "456.456"
-                },
-                favorite: true,
-                lastVisite: "2022-30-03"     
-            },
-            { 
-                id: 2,
-                foodStore: "Dori, Dori",
-                location: {
-                    lon: "123.123",
-                    lat: "456.456"
-                },
-                favorite: true,
-                lastVisite: "2022-29-03"     
-            },
-            { 
-                id: 3,
-                foodStore: "Chipo",
-                location: {
-                    lon: "123.123",
-                    lat: "456.456"
-                },
-                favorite: false,
-                lastVisite: "2022-28-03"     
-            },
+        { 
+            id: 1,
+            foodStore: "Casino",                
+            long: "123.123",
+            lat: "456.456",
+            favorite: true,
+            lastVisite: "2022-30-03"     
+        },
+        { 
+            id: 2,
+            foodStore: "Dori, Dori",
+            long: "123.123",
+            lat: "456.456",
+            favorite: true,
+            lastVisite: "2022-29-03"     
+        },
+        { 
+            id: 3,
+            foodStore: "Chipo",
+            long: "123.123",
+            lat: "456.456",
+            favorite: false,
+            lastVisite: "2022-28-03"     
+        },
         ]
 
     console.log("RESULT BACK TO..:", req.headers.host);
+    console.log("LONG : ", long);
+    console.log("LAT  : ", lat);
 
     res.status(200).send(JSON.stringify(dummyFoodStores))
 })
