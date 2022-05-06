@@ -65,34 +65,43 @@ let dummyFoodStores = [
     },
 ]
 
-const fetchFoodStores = async (lat, lng) => {
+const fetchType = async (typ, lat, lng) => {
     return await googleApiClient
-        .placesNearby({
-            params: {
-                location: [lat, lng],
-                key: GOOGLE_API_KEY,
-                radius: 2000,
-                type: 'restaurant'
+    .placesNearby({
+        params: {
+            location: [lat, lng],
+            key: GOOGLE_API_KEY,
+            radius: 2000,
+            type: typ
+        }
+    })
+    .then((r) => {
+        let results = r.data.results;
+        results.sort(() => Math.random() - 0.5)
+        results = results.slice(0, 3)
+        return results.map((result, index) => {
+            return {
+                id: index, foodStore: result.name,
+                long: result.geometry.location.lng, lat: result.geometry.location.lat,
+                favorite: false, lastVisite: "",
+                placeId: result.place_id,
+                mapsUrl: `https://www.google.com/maps/place/?q=place_id:${result.place_id}`
             }
         })
-        .then((r) => {
-            let results = r.data.results;
-            results.sort(() => Math.random() - 0.5)
-            results = results.slice(0, 3)
-            return results.map((result, index) => {
-                return {
-                    id: index, foodStore: result.name,
-                    long: result.geometry.location.lng, lat: result.geometry.location.lat,
-                    favorite: false, lastVisite: "",
-                    placeId: result.place_id,
-                    mapsUrl: `https://www.google.com/maps/place/?q=place_id:${result.place_id}`
-                }
-            })
-        })
-        .catch((e) => {
-            console.log(e.response);
-            return []
-        });
+    })
+    .catch((e) => {
+        console.log(e.response);
+        return []
+    });
+}
+
+const fetchFoodStores = async (lat, lng) => {
+    let cafes = await fetchType('cafe', lat, lng);
+    let restaurants = await fetchType('restaurant', lat, lng);
+    let results = cafes.concat(restaurants);
+    results.sort(() => Math.random() - 0.5)
+    results = results.slice(0, 3)
+    return results
 }
 
 /**
