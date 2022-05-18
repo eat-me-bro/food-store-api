@@ -129,7 +129,7 @@ app.post("/location", async (req, res) => {
         ipgeolocationApi.getGeolocation(location => {
             //console.log(location);
             let result = {
-                long: location.longitudem, 
+                long: location.longitude, 
                 lat: location.latitude
             }
             res.status(200).json(result);
