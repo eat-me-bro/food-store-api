@@ -4,6 +4,9 @@ const moment = require('moment')
 const { Client } = require("@googlemaps/google-maps-services-js");
 const googleApiClient = new Client();
 
+const IPGeolocationAPI = require('ip-geolocation-api-javascript-sdk');
+const GeolocationParams = require('ip-geolocation-api-javascript-sdk/GeolocationParams.js');
+
 const http = require('http')
 const express = require('express')
 const app = express()
@@ -36,34 +39,11 @@ const dotenv = require('dotenv')
 dotenv.config()
 
 const SERVER_PORT = process.env.SERVER_PORT || 5500
-const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
+const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY
+const IP_GEOLOCATION_API_KEY = process.env.IP_GEOLOCATION_API_KEY
 
-let dummyFoodStores = [
-    {
-        id: 1,
-        foodStore: "Casino",
-        long: "123.123",
-        lat: "456.456",
-        favorite: true,
-        lastVisite: "2022-30-03"
-    },
-    {
-        id: 2,
-        foodStore: "Dori, Dori",
-        long: "123.123",
-        lat: "456.456",
-        favorite: true,
-        lastVisite: "2022-29-03"
-    },
-    {
-        id: 3,
-        foodStore: "Chipo",
-        long: "123.123",
-        lat: "456.456",
-        favorite: false,
-        lastVisite: "2022-28-03"
-    },
-]
+const ipgeolocationApi = new IPGeolocationAPI(IP_GEOLOCATION_API_KEY, false); 
+
 
 const fetchType = async (typ, lat, lng) => {
     return await googleApiClient
@@ -123,13 +103,36 @@ app.post("/foodstores", async (req, res) => {
     let long = req.body.long
     let lat = req.body.lat
 
-    console.log("RESULT BACK TO..:", req.headers.host);
-    console.log("LONG : ", long);
-    console.log("LAT  : ", lat);
-    let foodStores = await fetchFoodStores(lat, long);
-    console.log(foodStores);
+    // console.log("RESULT BACK TO..:", req.headers.host);
+    // console.log("LON  : ", long);
+    // console.log("LAT  : ", lat);
+    try {
+        let foodStores = await fetchFoodStores(lat, long);
+        //console.log(foodStores);
+        res.status(200).json(foodStores);  
+    } catch (error) {
+        res.status(404).json("");
+    }
 
-    res.status(200).json(foodStores);
+})
+
+// get geolocation, based on IP4 adress
+app.post("/location", async (req, res) => {
+    res.setHeader('Content-Type', 'application/json')
+
+    let userip4 = req.body.userip4
+
+    try {
+        let geolocationParams = new GeolocationParams()
+        geolocationParams.setIPAddress(userip4)
+
+        ipgeolocationApi.getGeolocation(location => {
+            //console.log(location);
+            res.status(200).json(location);
+        }, geolocationParams)
+    } catch (error) {
+        res.status(404).json("");
+    }
 })
 
 /**
