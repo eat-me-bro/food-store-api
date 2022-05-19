@@ -120,9 +120,7 @@ app.post("/location", async (req, res) => {
 
     axios.get(`https://timezoneapi.io/api/ip/?${userip4}&token=${TIMEZONEAPI_KEY}`).then(geodata => {
         let { location } = geodata.data.data
-
         let locationPos = location.split(',')
-
         let result = {
             long:locationPos[1], 
             lat: locationPos[0]
@@ -134,53 +132,6 @@ app.post("/location", async (req, res) => {
         console.error(error)
         res.status(404).json("")
     })
-
-
-
-    // try {
-        
-    //     const options = {
-    //         host: `timezoneapi.io/api/ip/?62.143.144.247&token=aEWTsbzHOzjAyXdNRmTR`,
-    //         // hostname: `https://timezoneapi.io/api/ip/?${userip4}&token=${TIMEZONEAPI_KEY}`,
-    //         port: 443,
-    //         method: 'GET'            
-    //     }
-
-    //     const req = https.request(options, res => {
-    //         console.log(`statusCode: ${res.statusCode}`)
-          
-    //         res.on('data', d => {              
-    //             console.log(d);
-    //             // let result = {
-    //             //     long: location.longitude, 
-    //             //     lat: location.latitude
-    //             // }
-    //         res.status(200).json(d);
-
-    //         })
-
-    //       })
-          
-    //       req.on('error', error => {
-    //         console.error(error)
-    //         res.status(404).json("");
-    //       })
-          
-    //       req.end()
-
-
-    //     // ipgeolocationApi.getGeolocation(location => {
-    //     //     //console.log(location);
-    //     //     let result = {
-    //     //         long: location.longitude, 
-    //     //         lat: location.latitude
-    //     //     }
-    //     //     res.status(200).json(result);
-    //     // }, geolocationParams)
-
-    // } catch (error) {
-    //     res.status(404).json("");
-    // }
 })
 
 /**
