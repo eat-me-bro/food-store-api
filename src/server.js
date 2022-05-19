@@ -103,9 +103,8 @@ app.post("/foodstores", async (req, res) => {
     let long = req.body.long
     let lat = req.body.lat
 
-    // console.log("RESULT BACK TO..:", req.headers.host);
-    // console.log("LON  : ", long);
-    // console.log("LAT  : ", lat);
+    // console.log("LON......: ", long);
+    // console.log("LAT......: ", lat);    
     try {
         let foodStores = await fetchFoodStores(lat, long);
         //console.log(foodStores);
@@ -122,12 +121,13 @@ app.post("/location", async (req, res) => {
 
     let userip4 = req.body.userip4
 
+    //console.log("USERIP4..: ", userip4);
     try {
         let geolocationParams = new GeolocationParams()
         geolocationParams.setIPAddress(userip4)
 
         ipgeolocationApi.getGeolocation(location => {
-            //console.log(location);
+            console.log(location);
             let result = {
                 long: location.longitude, 
                 lat: location.latitude
