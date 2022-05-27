@@ -40,13 +40,13 @@ const SERVER_PORT = process.env.SERVER_PORT || 5500
 const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY
 const TIMEZONEAPI_KEY = process.env.TIMEZONEAPI_KEY
 
-const fetchType = async (typ, lat, lng) => {
+const fetchType = async (typ, lat, lng, radius) => {
     return await googleApiClient
     .placesNearby({
         params: {
             location: [lat, lng],
             key: GOOGLE_API_KEY,
-            radius: 2000,
+            radius,
             type: typ
         }
     })
@@ -71,9 +71,13 @@ const fetchType = async (typ, lat, lng) => {
 }
 
 const fetchFoodStores = async (lat, lng) => {
-    let cafes = await fetchType('cafe', lat, lng);
-    let restaurants = await fetchType('restaurant', lat, lng);
-    let results = cafes.concat(restaurants);
+    let types = ['cafe', 'restaurant'];
+    let radius = 2000;
+    let results = [];
+    types.forEach(typ => {
+        let result = await fetchType(typ, lat, lng, radius);
+        results.concat(result);
+    });
     results.sort(() => Math.random() - 0.5)
     results = results.slice(0, 3)
     return results
